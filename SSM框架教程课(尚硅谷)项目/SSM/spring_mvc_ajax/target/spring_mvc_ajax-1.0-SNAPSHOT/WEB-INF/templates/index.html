@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+
+<body>
+<div id="app">
+    <h1>index.html</h1>
+
+    <h2>1、SpringMVC 处理 ajax 请求</h2>
+    <h3>1.1、SpringMVC 处理 ajax 请求</h3>
+    <input type="button" value="测试 SpringMVC 处理 ajax 请求" @click="testAjax">
+
+    <h3>1.2、@RequestBody 获取 json 格式的请求参数</h3>
+    <input type="button" value="测试 @RequestBody 注解处理 json 格式的请求参数" @click="testRequestBody">
+
+    <h3>1.3、@ResponseBody 响应浏览器数据</h3>
+    <a th:href="@{/test/responseBody}">测试 @ResponseBody 注解响应浏览器数据</a>
+
+    <h3>1.4、@ResponseBody 响应浏览器 json 数据</h3>
+    <input type="button" value="测试 @ResponseBody 注解响应浏览器 json 数据" @click="testResponseBody">
+
+    <hr>
+
+    <h2>2、文件上传和下载</h2>
+    <h3>2.1、下载图片</h3>
+    <a th:href="@{/test/download}">下载图片</a>
+
+    <h2>2.2、上传图片</h2>
+    <form th:action="@{/test/upload}" method="post" enctype="multipart/form-data">
+        头像<input type="file" id="picture" name="picture" required accept="image/*"><br>
+        <input type="submit" value="上传">
+    </form>
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/vue.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/axios.js}"></script>
+
+<script type="text/javascript">
+    /**
+     *     axios({
+     *         // 请求路径
+     *         url:"",
+     *
+     *         // 请求方式
+     *         method:"",
+     *
+     *         // 以 name=value&name=value 的方式发送的请求参数
+     *         // 不管使用的请方式是 get 或 post，请参数都会被拼接到请求地址后
+     *         // 此种方式的请求参数可以通过 request.getParameter() 获取
+     *         params:{},
+     *
+     *         // 以 json 格式发送的请求参数
+     *         // 请求参数会被保存到请求报文的请求体传输到服务器
+     *         // 此种方式的请求参数可以不通过 request.getParameter() 获取
+     *         data:{}
+     *     }).then(response=>{
+     *         console.log(response.data);
+     *     });
+     */
+    let vue = new Vue({
+        el: "#app",
+
+        methods: {
+            testAjax() {
+                axios.post(
+                    "/spring_mvc_ajax/test/ajax?id=1",
+                    {
+                        username: "MYXH",
+                        password: "520.ILY!"
+                    }
+                ).then(response => {
+                    console.log(response.data)
+                });
+            },
+
+            testRequestBody() {
+                axios.post(
+                    "/spring_mvc_ajax/test/requestBody/json",
+                    {
+                        id: "1",
+                        username: "MYXH",
+                        password: "520.ILY!",
+                        age: "21",
+                        gender: "男",
+                        email: "1735350920@qq.com"
+                    }
+                ).then(response => {
+                    console.log(response.data)
+                });
+            },
+
+            testResponseBody() {
+                axios.post(
+                    "/spring_mvc_ajax/test/responseBody/json"
+                ).then(response => {
+                    console.log(response.data)
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

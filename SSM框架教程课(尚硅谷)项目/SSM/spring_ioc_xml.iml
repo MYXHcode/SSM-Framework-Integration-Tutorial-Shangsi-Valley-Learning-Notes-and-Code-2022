@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Ioc" removed="false">
+          <file>file://$MODULE_DIR$/spring_ioc_xml/src/main/resources/spring-ioc.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Spring Datasource" removed="false">
+          <file>file://$MODULE_DIR$/spring_ioc_xml/src/main/resources/spring-datasource.xml</file>
+        </fileset>
+        <fileset id="fileset3" name="Spring Scope" removed="false">
+          <file>file://$MODULE_DIR$/spring_ioc_xml/src/main/resources/spring-scope.xml</file>
+        </fileset>
+        <fileset id="fileset4" name="Spring Lifecycle" removed="false">
+          <file>file://$MODULE_DIR$/spring_ioc_xml/src/main/resources/spring-lifecycle.xml</file>
+        </fileset>
+        <fileset id="fileset5" name="Spring Factory" removed="false">
+          <file>file://$MODULE_DIR$/spring_ioc_xml/src/main/resources/spring-factory.xml</file>
+        </fileset>
+        <fileset id="fileset6" name="Spring Autowire" removed="false">
+          <file>file://$MODULE_DIR$/spring_ioc_xml/src/main/resources/spring-autowire-xml.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

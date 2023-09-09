@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myxh.mybatis.mapper.UserMapper">
+    <!-- User getUserByUsername(String username); -->
+    <select id="getUserByUsername" resultType="User">
+        <!-- select * from t_user where username = '${username}'; -->
+        select * from t_user where username = #{username};
+    </select>
+
+    <!-- User checkLogin(String username, String password); -->
+    <select id="checkLogin" resultType="User">
+        <!-- select * from t_user where username = '${arg0}' and password = '${arg1}'; -->
+        <!-- select * from t_user where username = '${param1}' and password = '${param2}'; -->
+
+        <!-- select * from t_user where username = #{arg0} and password = #{arg1}; -->
+        select * from t_user where username = #{param1} and password = #{param2};
+    </select>
+
+    <!-- User checkLoginByUserMap(Map<String, Object> userMap); -->
+    <select id="checkLoginByUserMap" resultType="User">
+        <!-- select * from t_user where username = '${username}' and password = '${password}'; -->
+        select * from t_user where username = #{username} and password = #{password};
+    </select>
+
+    <!-- int insertUser(User user); -->
+    <insert id="insertUser">
+        <!--
+        insert into t_user (id, username, password, age, gender, email)
+        values (null, '${username}', '${password}', '${age}', '${gender}', '${email}');
+         -->
+        insert into t_user (id, username, password, age, gender, email)
+        values (null, #{username}, #{password}, #{age}, #{gender}, #{email});
+    </insert>
+
+    <!-- User checkLoginByUserParam(@Param("username") String username, @Param("password") String password); -->
+    <select id="checkLoginByUserParam" resultType="User">
+        <!-- select * from t_user where username = '${username}' and password = '${password}'; -->
+        select * from t_user where username = #{username} and password = #{password};
+    </select>
+</mapper>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+    <bean id="student1" class="com.myxh.spring.pojo.Student"/>
+
+    <bean id="student2" class="com.myxh.spring.pojo.Student">
+        <!--
+        property：通过成员变量的 set 方法进行赋值
+        name：设置需要值的属性名（和 set 方法有关）
+        value：设置为属性所赋的值
+         -->
+        <property name="studentId" value="1"/>
+        <property name="studentName" value="张三"/>
+        <property name="age" value="20"/>
+        <property name="gender" value="男"/>
+    </bean>
+
+    <bean id="student3" class="com.myxh.spring.pojo.Student">
+        <constructor-arg value="2"/>
+        <constructor-arg value="李四"/>
+        <constructor-arg value="男"/>
+        <constructor-arg value="21" name="age"/>
+    </bean>
+
+    <bean id="student4" class="com.myxh.spring.pojo.Student">
+        <property name="studentId" value="3"/>
+        <!--
+            <：&lt;
+            >：&gt;
+            CDATA 节其中的内容会原样解析 <![CDATA[ ... ]]>
+            CDATA 节是 xml 中一个特殊的标签，因此不能写在一个属性中
+         -->
+        <!-- <property name="studentName" value="&lt;王五&gt;"/> -->
+        <property name="studentName">
+            <value><![CDATA[<王五>]]></value>
+        </property>
+        <property name="age" value="22"/>
+        <property name="gender">
+            <null/>
+        </property>
+    </bean>
+
+    <bean id="student5" class="com.myxh.spring.pojo.Student">
+        <property name="studentId" value="4"/>
+        <property name="studentName" value="赵六"/>
+        <property name="age" value="23"/>
+        <property name="gender" value="男"/>
+        <!-- ref：引用 IOC 容器中的某个 bean 的 id -->
+        <!-- <property name="clazz" ref="clazz1"/> -->
+
+        <!-- 级联的方式，要保证提前为 Clazz 属性赋值或者实例化-->
+        <!--
+        <property name="clazz.clazzId" value="2"/>
+        <property name="clazz.clazzName" value="2 班"/>
+         -->
+
+        <property name="clazz">
+            <!-- 内部 bean，只能在当前 bean 的内部使用，不能直接通过 IOC 容器获取 -->
+            <bean id="clazzInner" class="com.myxh.spring.pojo.Clazz">
+                <property name="clazzId" value="3"/>
+                <property name="clazzName" value="3 班"/>
+            </bean>
+        </property>
+
+        <property name="hobby">
+            <array>
+                <value>游戏</value>
+                <value>动漫</value>
+                <value>音乐</value>
+            </array>
+        </property>
+
+        <!--
+        <property name="teacherMap">
+            <map>
+                <entry key="1" value-ref="teacher1"/>
+                <entry key="2" value-ref="teacher2"/>
+            </map>
+        </property>
+         -->
+
+        <property name="teacherMap" ref="teacherMap"/>
+    </bean>
+
+    <bean id="student6" class="com.myxh.spring.pojo.Student"
+          p:studentId="6" p:studentName="钱七" p:age="24" p:gender="男" p:teacherMap-ref="teacherMap"/>
+
+    <bean id="clazz1" class="com.myxh.spring.pojo.Clazz">
+        <property name="clazzId" value="1"/>
+        <property name="clazzName" value="1 班"/>
+
+        <!--
+        <property name="students">
+            <list>
+                <ref bean="student1"/>
+                <ref bean="student2"/>
+                <ref bean="student3"/>
+                <ref bean="student4"/>
+                <ref bean="student5"/>
+            </list>
+        </property>
+         -->
+
+        <property name="students" ref="studentList"/>
+    </bean>
+
+    <bean id="teacher1" class="com.myxh.spring.pojo.Teacher">
+        <property name="teacherId" value="1"/>
+        <property name="teacherName" value="MYXH"/>
+    </bean>
+
+    <bean id="teacher2" class="com.myxh.spring.pojo.Teacher">
+        <property name="teacherId" value="2"/>
+        <property name="teacherName" value="末影小黑xh"/>
+    </bean>
+
+    <!-- 配置一个集合类型的 bean，需要使用 util 的约束 -->
+    <util:list id="studentList">
+        <ref bean="student1"/>
+        <ref bean="student2"/>
+        <ref bean="student3"/>
+        <ref bean="student4"/>
+        <ref bean="student5"/>
+    </util:list>
+
+    <util:map id="teacherMap">
+        <entry key="1" value-ref="teacher1"/>
+        <entry key="2" value-ref="teacher2"/>
+    </util:map>
+</beans>

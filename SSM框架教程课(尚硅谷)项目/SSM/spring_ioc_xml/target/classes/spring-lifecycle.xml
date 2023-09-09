@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="user" class="com.myxh.spring.pojo.User" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="id" value="1"/>
+        <property name="username" value="MYXH"/>
+        <property name="password" value="520.ILY!"/>
+        <property name="age" value="21"/>
+        <property name="gender" value="男"/>
+        <property name="email" value="1735350920@qq.com"/>
+    </bean>
+
+    <bean id="myBeanPostProcessor" class="com.myxh.spring.processor.MyBeanPostProcessor"/>
+</beans>

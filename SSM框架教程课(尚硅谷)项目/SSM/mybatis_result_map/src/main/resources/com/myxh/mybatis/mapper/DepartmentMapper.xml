@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myxh.mybatis.mapper.DepartmentMapper">
+    <!-- Department getEmployeeAndDepartmentByStepTwo(@Param("departmentId") Integer departmentId); -->
+    <select id="getEmployeeAndDepartmentByStepTwo" resultType="Department">
+        select * from t_department where department_id = #{departmentId};
+    </select>
+
+    <resultMap id="DepartmentAndEmployeeResultMap" type="Department">
+        <id column="department_id" property="departmentId"/>
+        <result column="department_name" property="departmentName"/>
+        <result column="department_email" property="email"/>
+        <!--
+        collection：处理一对多的映射关系（处理集合类型的属性）
+        ofType：设置要处理的集合类型的属性中存储的数据的类型
+         -->
+        <collection property="employees" ofType="Employee">
+            <id column="employee_id" property="employeeId"/>
+            <result column="employee_name" property="employeeName"/>
+            <result column="age" property="age"/>
+            <result column="gender" property="gender"/>
+            <result column="employee_email" property="email"/>
+        </collection>
+    </resultMap>
+
+    <!-- Department getDepartmentAndEmployeeByDepartmentId(@Param("departmentId") Integer departmentId); -->
+    <select id="getDepartmentAndEmployeeByDepartmentId" resultMap="DepartmentAndEmployeeResultMap">
+        select
+        t_d.department_id,
+        t_d.department_name,
+        t_d.email as department_email,
+        t_e.employee_id,
+        t_e.employee_name,
+        t_e.age,
+        t_e.gender,
+        t_e.email as employee_email
+        from t_department as t_d
+        left join t_employee as t_e
+        on t_d.department_id = t_e.department_id
+        where t_d.department_id = #{departmentId};
+    </select>
+
+    <resultMap id="DepartmentAndEmployeeByStepResultMap" type="Department">
+        <id column="department_id" property="departmentId"/>
+        <result column="department_name" property="departmentName"/>
+        <result column="email" property="email"/>
+        <collection property="employees" fetchType="eager"
+                    select="com.myxh.mybatis.mapper.EmployeeMapper.getDepartmentAndEmployeeByStepTwo"
+                    column="department_id">
+        </collection>
+    </resultMap>
+
+    <!-- Department getDepartmentAndEmployeeByStepOne(@Param("departmentId") Integer departmentId); -->
+    <select id="getDepartmentAndEmployeeByStepOne" resultMap="DepartmentAndEmployeeByStepResultMap">
+        select * from t_department where department_id = #{departmentId};
+    </select>
+</mapper>

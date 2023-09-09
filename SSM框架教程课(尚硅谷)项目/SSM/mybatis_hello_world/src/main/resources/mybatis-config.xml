@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+        MyBatis 核心配置文件中的标签必须要按照指定的顺序配置：
+        properties?,settings?,typeAliases?,typeHandlers?,
+        objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,
+        environments?,databaseIdProvider?,mappers?
+     -->
+
+    <!-- 引入 properties 文件，此后就可以在当前文件中使用 ${key} 的方式访问 value -->
+    <properties resource="jdbc.properties"/>
+
+    <!--
+        typeAlias：设置类型别名，即为某个具体的类型设置一个别名
+        在 MyBatis 的范围中，就可以使用别名表示一个具体的类型
+     -->
+    <typeAliases>
+        <!--
+            typeAlias：设置某个类型的别名
+            属性：
+            type：设置需要设置别名的类型
+            alias：设置某个类型的别名
+         -->
+        <!-- <typeAlias type="com.myxh.mybatis.pojo.User" alias="User"></typeAlias> -->
+        <!-- 若不设置 alias，当前的类型拥有默认的别名，即类名且不区分大小写 -->
+        <!-- <typeAlias type="com.myxh.mybatis.pojo.User"></typeAlias> -->
+
+        <!-- 通过包设置类型别名，指定包下所有的类型将全部拥有默认的别名，即类名且不区分大小 -->
+        <package name="com.myxh.mybatis.pojo"/>
+    </typeAliases>
+
+    <!--
+        environments：配置连接数据库的环境
+        属性：
+        default：设置默认使用的环境的 id
+     -->
+    <environments default="development">
+        <!--
+            environment：设置一个具体地连接数据库的环境
+            属性：
+            id：设置环境的唯一标识，不能重复
+         -->
+        <environment id="development">
+            <!--
+                transactionManager：设置事务管理器
+                属性：
+                type：设置事务管理的方式
+                type="JDBC|MANAGED"
+                JDBC：表示使用 JDBC 中原生的事务管理方式
+                MANAGED：被管理，例如 Spring
+             -->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--
+                    datasource：设置数据源
+                    属性：
+                    type：设置数据源的类型
+                    type="POOLED|UNPOOLED|JNDI"
+                    POOLED：表示使用数据库连接池
+                    UNPOOLED：表示不使用数据库连接池
+                    JNDI：表示使用上下文中的数据源
+                 -->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--引入 MyBatis 的映射文件 -->
+    <mappers>
+        <!-- <mapper resource="com/myxh/mybatis/mapper/UserMapper.xml"/> -->
+        <!--
+            以包的方式引入映射文件，但是必须满足两个条件：
+            1、mapper 接口和映射文件所在的包必须一致
+            2、mapper 接口的名字和映射文件的名字必须一致
+         -->
+        <package name="com.myxh.mybatis.mapper"/>
+    </mappers>
+</configuration>

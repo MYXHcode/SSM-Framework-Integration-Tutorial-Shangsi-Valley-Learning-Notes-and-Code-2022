@@ -1,0 +1,42 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="spring_mvc_annotation:war exploded">
+    <output-path>$PROJECT_DIR$/spring_mvc_annotation/target/spring_mvc_annotation-1.0-SNAPSHOT</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>spring_mvc_annotation</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="spring_mvc_annotation" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:6.0.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:6.0.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:6.0.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:6.0.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:6.0.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:6.0.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:6.0.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:6.0.9" />
+          <element id="library" level="project" name="Maven: io.micrometer:micrometer-observation:1.10.7" />
+          <element id="library" level="project" name="Maven: io.micrometer:micrometer-commons:1.10.7" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.4.7" />
+          <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.4.7" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:2.0.4" />
+          <element id="library" level="project" name="Maven: org.thymeleaf:thymeleaf-spring6:3.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.thymeleaf:thymeleaf:3.1.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.attoparser:attoparser:2.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.unbescape:unbescape:1.1.6.RELEASE" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/spring_mvc_annotation/target/spring_mvc_annotation-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="spring_mvc_annotation/web/Web" />
+    </root>
+  </artifact>
+</component>

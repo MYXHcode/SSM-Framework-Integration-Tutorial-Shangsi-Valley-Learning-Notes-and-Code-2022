@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+
+<body>
+<h1>index.html</h1>
+
+<h2>1、@RequestMapping注解</h2>
+<h3>1.1、@RequestMapping 注解标识的位置</h3>
+<a th:href="@{/test/hello}">测试 @RequestMapping 注解所标识的位置</a>
+
+<h3>1.2、@RequestMapping 注解 value 属性</h3>
+<a th:href="@{/test/hello2}">测试 @RequestMapping 注解的 value 属性</a>
+
+<h3>1.3、@RequestMapping 注解的 method属性</h3>
+<form th:action="@{/test/hello}" method="post">
+    <input type="submit" value="测试 @RequestMapping 注解的 method 属性">
+</form>
+
+<h3>1.4、@RequestMapping 注解的 params 属性</h3>
+<form th:action="@{|/test/hello?username=${'MYXH'}|}" method="post">
+    <input type="submit" value="测试 @RequestMapping 注解的 params 属性">
+</form>
+
+<form th:action="@{/test/hello(username='MYXH')}" method="post">
+    <input type="submit" value="测试 @RequestMapping 注解的 params 属性">
+</form>
+
+<h3>1.5、SpringMVC 支持 ant 风格的路径</h3>
+<a th:href="@{/test/ant/test}">测试 @RequestMapping 注解支持 ant 风格的路径</a>
+
+<h3>1.6、SpringMVC 支持路径中的占位符</h3>
+<form th:action="@{/test/rest/1/MYXH}" method="post">
+    <input type="submit" value="测试 @RequestMapping 注解的 value 属性的占位符">
+</form>
+
+<hr>
+
+<h2>2、SpringMVC 获取请求参数</h2>
+<h3>2.1、通过 ServletAPI 获取请求参数</h3>
+<form th:action="@{/param/servlet/api}" method="post">
+    <label>
+        用户名：
+        <input type="text" name="username"><br>
+        密 码：<input type="password" name="password"><br>
+        <input type="submit" value="登录">
+    </label>
+</form>
+
+<h3>2.2、通过控制器方法的形参获取请求参数</h3>
+<form th:action="@{/param}" method="post">
+    <label>
+        用户名：
+        <input type="text" name="name"><br>
+        密 码：<input type="password" name="password"><br>
+        <input type="submit" value="登录">
+    </label>
+</form>
+
+<h3>2.3、通过 pojo 取请求参数</h3>
+<form th:action="@{/param/pojo}" method="post">
+    <label>
+        用户名：
+        <input type="text" name="username"><br>
+        密 码：<input type="password" name="password"><br>
+        <input type="submit" value="登录">
+    </label>
+</form>
+
+<hr>
+
+<h2>3、域对象共享数据</h2>
+<h3>3.1、使用 ServletAPI 向 request 域对象共享数据</h3>
+<a th:href="@{/test/servlet/api}">测试 ServletAPI 向 request 域对象共享数据</a>
+
+<h3>3.2、使用 ModelAndView 向 request 域对象共享数据</h3>
+<a th:href="@{|/test/model/${#strings.escapeXml('and')}/view|}">测试 ModelAndView 向 request 域对象共享数据</a>
+
+<h3>3.3、使用 Model 向 request 域对象共享数据</h3>
+<a th:href="@{/test/model}">测试 Model 向 request 域对象共享数据</a>
+
+<h3>3.4、使用 ModelMap 向 request 域对象共享数据</h3>
+<a th:href="@{/test/model/map}">测试 ModelMap 向 request 域对象共享数据</a>
+
+<h3>3.5、使用 map 向 request 域对象共享数据</h3>
+<a th:href="@{/test/map}">测试 map 向 request 域对象共享数据</a>
+
+<h3>3.6、使用 ServletAPI 向 session 域共享数据</h3>
+<a th:href="@{/test/session}">测试 ServletAPI 向 session 域共享数据</a>
+
+<h3>3.7、使用 ServletAPI 向 application 域共享数据</h3>
+<a th:href="@{/test/application}">测试 map 向 application 域共享数据</a>
+
+<hr>
+
+<h2>4、SpringMVC 的视图</h2>
+<h3>4.1、ThymeleafView</h3>
+<a th:href="@{/test/view/thymeleaf}">测试 SpringMVC 的视图 ThymeleafView</a>
+
+<h3>4.2、转发视图</h3>
+<a th:href="@{/test/view/forward}">测试 SpringMVC 的视图 InternalResonanceView</a>
+
+<h3>4.3、重定向视图</h3>
+<a th:href="@{/test/view/redirect}">测试 SpringMVC 的视图 RedirectView</a>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="user" class="com.myxh.spring.pojo.User">
+        <property name="id" value="1"/>
+        <property name="username" value="MYXH"/>
+        <property name="password" value="520.ILY!"/>
+        <property name="age" value="21"/>
+        <property name="gender" value="男"/>
+        <property name="email" value="1735350920@qq.com"/>
+    </bean>
+
+    <!--
+    <bean id="userController" class="com.myxh.spring.controller.UserController">
+         <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="userService" class="com.myxh.spring.service.impl.UserServiceImpl">
+         <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="userDao" class="com.myxh.spring.dao.impl.UserDaoImpl"/>
+     -->
+
+    <!--
+    <bean id="userController" class="com.myxh.spring.controller.UserController" autowire="byType"/>
+
+    <bean id="userService" class="com.myxh.spring.service.impl.UserServiceImpl" autowire="byType"/>
+
+    <bean id="userDao" class="com.myxh.spring.dao.impl.UserDaoImpl"/>
+     -->
+
+    <bean id="userController" class="com.myxh.spring.controller.UserController" autowire="byName"/>
+
+    <bean id="userService" class="com.myxh.spring.service.impl.UserServiceImpl" autowire="byName"/>
+
+    <bean id="userService2" class="com.myxh.spring.service.impl.UserServiceImpl" autowire="byName"/>
+
+    <bean id="userDao" class="com.myxh.spring.dao.impl.UserDaoImpl"/>
+
+    <bean id="userDao2" class="com.myxh.spring.dao.impl.UserDaoImpl"/>
+</beans>

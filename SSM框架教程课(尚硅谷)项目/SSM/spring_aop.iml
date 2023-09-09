@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Aop Annotation" removed="false">
+          <file>file://$MODULE_DIR$/spring_aop/src/main/resources/aop-annotation.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Aop Xml" removed="false">
+          <file>file://$MODULE_DIR$/spring_aop/src/main/resources/aop-xml.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

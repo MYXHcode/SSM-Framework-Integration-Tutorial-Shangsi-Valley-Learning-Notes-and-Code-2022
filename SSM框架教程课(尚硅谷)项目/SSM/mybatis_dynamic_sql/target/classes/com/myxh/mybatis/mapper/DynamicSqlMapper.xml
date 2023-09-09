@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myxh.mybatis.mapper.DynamicSqlMapper">
+
+    <!--
+    动态 SQL：
+    1、if：通过 test 属性中的表达式判断标签中的内容是否有效（是否会拼接到 SQL 中）
+    2、where
+    ① 若 where 标签中有条件成立，会自动生成 where 关键字
+    ② 会自动将 where 标签中内容前多余的 and 去掉，但是其中内容后多余的 and 无法去掉
+    ③ where 标签中没有任何一个条件成立，则 where 没有任何功能
+    3、trim
+    prefix、suffix：在标签中内容前面或后面添加指定内容
+    prefixOverrides、suffixOverrides：在标签中内容前面或后面去掉指定内容
+    4、choose、when、otherwise
+    相当于 Java 中的 if ... else if ... else
+    when 至少设置一个，otherwise 最多设置一个
+    5、foreach
+    collection：设置要循环的数组或集合
+    item：用一个字符串表示数组或集合中的每一个数据
+    separator：设置每次循环的数据之间的分隔符
+    open：循环的所有内容以什么开始
+    close：循环的所有内容以什么结束
+    6、SQL 片段
+    可以记录一段 SQL，在需要用的地方使用 include 标签进行引用
+    <sql id="employeeColumns">
+        employee_id, employee_name, age, gender, email, department_id
+    </sql>
+    <include refid="employeeColumns"/>
+     -->
+
+    <sql id="employeeColumns">
+        employee_id, employee_name, age, gender, email, department_id
+    </sql>
+
+    <!-- List<Employee> getEmployeeByCondition(Employee employee); -->
+    <!--
+    <select id="getEmployeeByCondition" resultType="Employee">
+        select <include refid="employeeColumns"/> from t_employee where 1=1
+        <if test="employeeName != null and employeeName != ''">
+            and employee_name = #{employeeName}
+        </if>
+        <if test="age != null">
+            and age = #{age}
+        </if>
+        <if test="gender != null and gender != ''">
+            and gender = #{gender}
+        </if>
+        <if test="email != null and email != ''">
+            and email = #{email}
+        </if>
+        ;
+    </select>
+     -->
+
+    <!--
+    <select id="getEmployeeByCondition" resultType="Employee">
+        select <include refid="employeeColumns"/> from t_employee
+        <where>
+            <if test="employeeName != null and employeeName != ''">
+                employee_name = #{employeeName}
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+        </where>
+        ;
+    </select>
+     -->
+
+    <select id="getEmployeeByCondition" resultType="Employee">
+        select <include refid="employeeColumns"/> from t_employee
+        <trim prefix="where" suffixOverrides="and">
+            <if test="employeeName != null and employeeName != ''">
+                employee_name = #{employeeName} and
+            </if>
+            <if test="age != null">
+                age = #{age} and
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender} and
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email}
+            </if>
+        </trim>
+        ;
+    </select>
+
+    <!-- List<Employee> getEmployeeByChoose(Employee employee); -->
+    <select id="getEmployeeByChoose" resultType="Employee">
+        select <include refid="employeeColumns"/> from t_employee
+        <where>
+            <choose>
+                <when test="employeeName != null and employeeName != ''">
+                    employee_name = #{employeeName}
+                </when>
+                <when test="age != null">
+                    age = #{age}
+                </when>
+                <when test="gender != null and gender != ''">
+                    gender = #{gender}
+                </when>
+                <when test="email != null and email != ''">
+                    email = #{email}
+                </when>
+            </choose>
+        </where>
+        ;
+    </select>
+
+    <!-- int insertMoreEmployee(@Param("employees") List<Employee> employees); -->
+    <insert id="insertMoreEmployee">
+        insert into t_employee (employee_id, employee_name, age, gender, email, department_id)
+        values
+        <foreach collection="employees" item="employee" separator=",">
+            (null, #{employee.employeeName}, #{employee.age}, #{employee.gender}, #{employee.email}, null)
+        </foreach>
+        ;
+    </insert>
+
+    <!-- int deleteMoreEmployee(@Param("employeeIds") Integer[] employeeIds); -->
+    <delete id="deleteMoreEmployee">
+        <!--
+        delete from t_employee where employee_id in
+        <foreach collection="employeeIds" item="employeeId" separator="," open="(" close=")">
+            #{employeeId}
+        </foreach>
+        ;
+         -->
+
+        delete from t_employee where
+        <foreach collection="employeeIds" item="employeeId" separator="or">
+            employee_id = #{employeeId}
+        </foreach>
+        ;
+    </delete>
+</mapper>

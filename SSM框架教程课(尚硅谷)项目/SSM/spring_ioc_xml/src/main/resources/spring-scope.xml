@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+    scope：设置 bean 的作用域
+    scope="singleton|prototype"
+    singleton（单例）：表示获取该 bean 所对应的对象都是同一个
+    prototype（多例）：表示获取该 bean 所对应的对象不是同一个
+      -->
+    <bean id="student" class="com.myxh.spring.pojo.Student" scope="prototype">
+        <property name="studentId" value="1"/>
+        <property name="studentName" value="张三"/>
+        <property name="age" value="20"/>
+        <property name="gender" value="男"/>
+    </bean>
+</beans>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring_mvc_hello_world" />
+        <module name="spring_mvc_dome" />
+        <module name="mybatis_generator" />
+        <module name="spring_mvc_ajax" />
+        <module name="spring_mvc_annotation" />
+        <module name="spring_mvc_rest" />
+        <module name="mybatis_hello_world" />
+        <module name="spring_transaction" />
+        <module name="mybatis_dynamic_sql" />
+        <module name="spring_listenter" />
+        <module name="spring_mvc_extension" />
+        <module name="mybatis_parameter" />
+        <module name="spring_proxy" />
+        <module name="spring_hello_world" />
+        <module name="spring_springmvc_mybatis" />
+        <module name="mybatis_cache" />
+        <module name="mybatis_result_map" />
+        <module name="spring_ioc_xml" />
+        <module name="spring_ioc_annotation" />
+        <module name="spring_aop" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ssm" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mybatis_cache" options="" />
+      <module name="mybatis_dynamic_sql" options="" />
+      <module name="mybatis_generator" options="" />
+      <module name="mybatis_hello_world" options="" />
+      <module name="mybatis_parameter" options="" />
+      <module name="mybatis_result_map" options="" />
+      <module name="spring_aop" options="" />
+      <module name="spring_hello_world" options="" />
+      <module name="spring_ioc_annotation" options="" />
+      <module name="spring_ioc_xml" options="" />
+      <module name="spring_listenter" options="" />
+      <module name="spring_mvc_ajax" options="" />
+      <module name="spring_mvc_annotation" options="" />
+      <module name="spring_mvc_dome" options="" />
+      <module name="spring_mvc_extension" options="" />
+      <module name="spring_mvc_hello_world" options="" />
+      <module name="spring_mvc_rest" options="" />
+      <module name="spring_proxy" options="" />
+      <module name="spring_springmvc_mybatis" options="" />
+      <module name="spring_transaction" options="" />
+      <module name="ssm" options="" />
+    </option>
+  </component>
+</project>

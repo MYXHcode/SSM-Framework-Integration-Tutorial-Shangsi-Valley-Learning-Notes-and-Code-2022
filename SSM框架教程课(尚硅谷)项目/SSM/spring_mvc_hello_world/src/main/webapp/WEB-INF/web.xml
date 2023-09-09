@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    <!-- 配置 SpringMVC 的前端控制器 DispatcherServlet -->
+    <!--
+        SpringMVC 的配置文件默认的位置和名称：
+        位置：WEB-INF 下
+        名称：<servlet-name>-servlet.xml，当前配置下的配置文件名为 SpringMVC-servlet.xml
+     -->
+    <servlet>
+        <servlet-name>springMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+        <!-- 设置 SpringMVC 配置文件的位置和名称 -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+
+        <!-- 将 DispatcherServlet 的初始化时间提前到服务器启动时 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springMVC</servlet-name>
+        <!--
+            url-pattern 中 / 和 /* 的区别：
+            /：匹配浏览器向服务器发送的所有请求（不包括 .jsp）
+            /*：匹配浏览器向服务器发送的所有请求（包括 .jsp）
+         -->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 扫描组件 -->
+    <context:component-scan base-package="com.myxh.springmvc"/>
+
+    <!-- 配置 Thymeleaf 视图解析器 -->
+    <bean id="viewResolver" class="org.thymeleaf.spring6.view.ThymeleafViewResolver">
+        <property name="order" value="1"/>
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="templateEngine">
+            <bean class="org.thymeleaf.spring6.SpringTemplateEngine">
+                <property name="templateResolver">
+                    <bean class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver">
+                        <!-- 视图前缀 -->
+                        <property name="prefix" value="/WEB-INF/templates/"/>
+
+                        <!-- 视图后缀 -->
+                        <property name="suffix" value=".html"/>
+
+                        <property name="templateMode" value="HTML"/>
+                        <property name="characterEncoding" value="UTF-8"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!--
+        配置默认的 servlet 处理静态资源
+
+        当前工程的 web.xml 配置的前端控制器 DispatcherServlet 的 url-pattern 是 /
+        tomcat 的 web.xml 配置的 DefaultServlet 的 url-pattern 也是 /
+        此时，浏览器发送的请求会优先被 DispatcherServlet 进行处理，但是 DispatcherServlet 无法处理静态资源
+        若配置了 <mvc:default-servlet-handler/>，此时浏览器发送的所有请求都会被 DefaultServlet 处理
+        若配置了 <mvc:default-servlet-handler/> 和 <mvc:annotation-driven/>
+        浏览器发送的请求会先被 DispatcherServlet 处理，无法处理在交给 DefaultServlet 处理
+      -->
+    <mvc:default-servlet-handler/>
+
+    <!-- 开启 mvc 的注解驱动-->
+    <mvc:annotation-driven/>
+
+    <!-- 配置视图控制器 -->
+    <mvc:view-controller path="/" view-name="index"/>
+
+    <!-- <bean id="firstInterceptor" class="com.myxh.springmvc.interceptor.FirstInterceptor"/> -->
+
+    <mvc:interceptors>
+        <!-- bean 和 ref 标签所配置的拦截器默认对 DispatcherServlet 处理的所有的请求进行拦截 -->
+        <!-- <bean class="com.myxh.springmvc.interceptor.FirstInterceptor"/> -->
+        <ref bean="firstInterceptor"/>
+        <ref bean="secondInterceptor"/>
+        <!--
+        <mvc:interceptor>
+            &lt;!&ndash; 配置需要拦截的请求的请求路径，/** 表示所有请求 &ndash;&gt;
+            <mvc:mapping path="/**"/>
+
+            &lt;!&ndash; 配置需要排除拦截的请求的请求路径 &ndash;&gt;
+            <mvc:exclude-mapping path="/test/exclude"/>
+
+            &lt;!&ndash; 配置拦载器 &ndash;&gt;
+            <ref bean="firstInterceptor"/>
+        </mvc:interceptor>
+         -->
+    </mvc:interceptors>
+    
+    <!--
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                &lt;!&ndash; key 设置要处理的异常，value 设置出现该异常时要跳转的页面所对应的逻辑视图 &ndash;&gt;
+                <prop key="java.lang.ArithmeticException">error</prop>
+            </props>
+        </property>
+
+        &lt;!&ndash; 设置共享在请求域中的异常信息的属性名 &ndash;&gt;
+        <property name="exceptionAttribute" value="ex"/>
+    </bean>
+     -->
+</beans>

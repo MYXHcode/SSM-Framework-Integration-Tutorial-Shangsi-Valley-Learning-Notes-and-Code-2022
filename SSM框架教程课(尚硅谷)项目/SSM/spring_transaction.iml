@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="FacetManager">
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <datasource-mapping>
+          <factory-entry name="spring_transaction" />
+        </datasource-mapping>
+        <naming-strategy-map />
+      </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Jdbc" removed="false">
+          <file>file://$MODULE_DIR$/spring_transaction/src/main/resources/spring-jdbc.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Tx Annotation" removed="false">
+          <file>file://$MODULE_DIR$/spring_transaction/src/main/resources/tx-annotation.xml</file>
+        </fileset>
+        <fileset id="fileset3" name="Tx Xml" removed="false">
+          <file>file://$MODULE_DIR$/spring_transaction/src/main/resources/tx-xml.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myxh.mybatis.mapper.CacheMapper">
+
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+
+    <!-- Employee getEmployeeByEmployeeId(@Param("employeeId") Integer employeeId); -->
+    <select id="getEmployeeByEmployeeId" resultType="Employee">
+        select * from t_employee where employee_id = #{employeeId};
+    </select>
+
+    <!-- int insertEmployee(@Param("employee") Employee employee); -->
+    <insert id="insertEmployee">
+        insert into t_employee (employee_id, employee_name, age, gender, email, department_id)
+        values (null, #{employee.employeeName}, #{employee.age}, #{employee.gender}, #{employee.email}, null);
+    </insert>
+</mapper>

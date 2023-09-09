@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myxh.mybatis.mapper.SpecialSqlMapper">
+    <!-- List<User> getUserByLikeUsername(@Param("username") String vagueUsername); -->
+    <select id="getUserByLikeUsername" resultType="User">
+        <!-- select * from t_user where username like '%${vagueUsername}%'; -->
+        <!-- select * from t_user where username like concat('%', #{vagueUsername}, '%'); -->
+        select * from t_user where username like "%"#{vagueUsername}"%";
+    </select>
+
+    <!-- int deleteMoreUserByIds(@Param("ids") String ids); -->
+    <delete id="deleteMoreUserByIds">
+        <!-- ids: 4, 5 -->
+        delete from t_user where id in(${ids});
+    </delete>
+
+    <!-- List<User> getUserByTableNameToList(@Param("tableName") String tableName); -->
+    <select id="getUserByTableNameToList" resultType="User">
+        select * from ${tableName};
+    </select>
+
+    <!-- int insertUser(User user); -->
+    <!--
+    useGeneratedKeys：表示当前添加功能使用自增的主键
+    keyProperty：将添加的数据的自增主键为实体类类型的参数的属性值
+     -->
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user (id, username, password, age, gender, email)
+        values (null, #{username}, #{password}, #{age}, #{gender}, #{email});
+    </insert>
+</mapper>

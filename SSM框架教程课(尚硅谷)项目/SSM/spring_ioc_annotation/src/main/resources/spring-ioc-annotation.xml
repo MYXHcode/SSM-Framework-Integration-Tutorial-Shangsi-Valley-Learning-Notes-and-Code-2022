@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--
+        context:exclude-filter：排除扫描
+        type：设置排除扫描的方式
+        type="annotation|assignable"
+        annotation：根据注解的类型进行排除，expression 需要设置排除的注解的全类名
+        assignable：根据类的类型进行排除，expression 需要设置排除的类的全类名
+
+        context:include-filter: 包含扫描
+        注意：需要在 context:component-scan 标签中设置 use-default-filters="false"
+        use-default-filters="true"（默认），所设置的包下所有的类都需要扫描，此时可以使用排除扫描
+        use-default-filters="false"，所设置的包下所有的类都不需要扫描，此时可以使用包含扫描
+     -->
+
+    <!-- 扫描组件 -->
+    <context:component-scan base-package="com.myxh.spring"/>
+
+    <!--
+    <context:component-scan base-package="com.myxh.spring">
+         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+         <context:exclude-filter type="assignable" expression="com.myxh.spring.controller.UserController"/>
+    </context:component-scan>
+     -->
+
+    <!--
+    <context:component-scan base-package="com.myxh.spring" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+     -->
+
+    <!-- <bean id="userService2" class="com.myxh.spring.service.impl.UserServiceImpl"/> -->
+
+    <!-- <bean id="userDao2" class="com.myxh.spring.dao.impl.UserDaoImpl"/> -->
+</beans>
